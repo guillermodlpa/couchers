@@ -136,5 +136,7 @@
         "home_page_link_label": "Go to homepage"
     },
     "show_all_events": "Show all events",
-    "reply": "Reply"
+    "reply": "Reply",
+    "yes": "Yes",
+    "ok": "OK"
 }

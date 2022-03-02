@@ -1,7 +1,8 @@
+import { useTranslation } from "i18n";
+import { GLOBAL } from "i18n/namespaces";
 import React, { ReactElement, useState } from "react";
 
 import Button from "./Button";
-import { YES } from "./constants";
 import {
   Dialog,
   DialogActions,
@@ -25,6 +26,7 @@ export default function ConfirmationDialogWrapper({
   confirmButtonLabel,
   onConfirm,
 }: ConfirmationDialogWrapperProps) {
+  const { t } = useTranslation(GLOBAL);
   const [isOpen, setIsOpen] = useState(false);
   const ariaLabel = `${title.replace(/\s+/g, "")}-confirmation-dialog`;
   const handleConfirm = () => {
@@ -41,9 +43,9 @@ export default function ConfirmationDialogWrapper({
         </DialogContent>
         <DialogActions>
           <Button onClick={handleConfirm}>
-            {confirmButtonLabel ? confirmButtonLabel : YES}
+            {confirmButtonLabel ? confirmButtonLabel : t("yes")}
           </Button>
-          <Button onClick={() => setIsOpen(false)}>Cancel</Button>
+          <Button onClick={() => setIsOpen(false)}>{t("cancel")}</Button>
         </DialogActions>
       </Dialog>
     </>

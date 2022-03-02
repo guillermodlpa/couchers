@@ -244,4 +244,3 @@ export const dateFormats = {
   "zh-TW": "YYYY/MM/DD",
   "zu-ZA": "YYYY/MM/DD",
 };
-export const YES = "Yes";
