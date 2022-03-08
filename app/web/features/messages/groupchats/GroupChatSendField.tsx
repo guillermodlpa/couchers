@@ -2,6 +2,8 @@ import Button from "components/Button";
 import TextField from "components/TextField";
 import { Empty } from "google-protobuf/google/protobuf/empty_pb";
 import { RpcError } from "grpc-web";
+import { useTranslation } from "i18n";
+import { GLOBAL, MESSAGES } from "i18n/namespaces";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { UseMutationResult } from "react-query";
@@ -19,6 +21,7 @@ export interface GroupChatSendFieldProps {
 export default function GroupChatSendField({
   sendMutation,
 }: GroupChatSendFieldProps) {
+  const { t } = useTranslation([GLOBAL, MESSAGES]);
   const classes = useSendFieldStyles();
 
   const { mutate: handleSend, isLoading } = sendMutation;
@@ -40,7 +43,7 @@ export default function GroupChatSendField({
     <form onSubmit={onSubmit} className={classes.container}>
       <TextField
         id="group-chat-message-field"
-        label="Message"
+        label={t("messages:chat_input.label")}
         name="text"
         defaultValue={""}
         inputRef={register}
@@ -59,7 +62,7 @@ export default function GroupChatSendField({
         loading={isLoading}
         className={classes.button}
       >
-        Send
+        {t("global:send")}
       </Button>
     </form>
   );

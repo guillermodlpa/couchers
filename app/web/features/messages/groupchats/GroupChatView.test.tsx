@@ -7,7 +7,6 @@ import {
   within,
 } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { SEND } from "features/constants";
 import { MARK_LAST_SEEN_TIMEOUT } from "features/messages/constants";
 import GroupChatView from "features/messages/groupchats/GroupChatView";
 import { Empty } from "google-protobuf/google/protobuf/empty_pb";
@@ -300,7 +299,7 @@ describe("GroupChatView", () => {
     await screen.findByRole("heading", { level: 1, name: "Test group chat" });
 
     userEvent.type(screen.getByLabelText("Message"), "Sounds good");
-    const sendButton = screen.getByRole("button", { name: SEND });
+    const sendButton = screen.getByRole("button", { name: t("global:send") });
     userEvent.click(sendButton);
     await waitForElementToBeRemoved(
       within(sendButton).getByRole("progressbar")
@@ -379,7 +378,11 @@ describe("GroupChatView", () => {
 
     getGroupChatMock.mockResolvedValue(baseGroupChatMockResponse);
 
-    screen.getByRole("button", { name: "Menu" }).click();
+    screen
+      .getByRole("button", {
+        name: t("messages:chat_view.actions_menu.a11y_label"),
+      })
+      .click();
     screen.getByText(t("messages:chat_view.mute.unmute_button_label")).click();
 
     await waitFor(() => {
@@ -402,7 +405,11 @@ describe("GroupChatView", () => {
     });
 
     await waitForElementToBeRemoved(screen.getByRole("progressbar"));
-    screen.getByRole("button", { name: "Menu" }).click();
+    screen
+      .getByRole("button", {
+        name: t("messages:chat_view.actions_menu.a11y_label"),
+      })
+      .click();
     screen.getByText(t("messages:chat_view.mute.button_label")).click();
     within(screen.getByRole("dialog"))
       .getByLabelText(t("messages:chat_view.mute.forever_label"))
@@ -425,7 +432,11 @@ describe("GroupChatView", () => {
     renderGroupChatView();
 
     await waitForElementToBeRemoved(screen.getByRole("progressbar"));
-    screen.getByRole("button", { name: "Menu" }).click();
+    screen
+      .getByRole("button", {
+        name: t("messages:chat_view.actions_menu.a11y_label"),
+      })
+      .click();
     screen.getByText(t("messages:chat_view.mute.button_label")).click();
     within(screen.getByRole("dialog"))
       .getByLabelText(t("messages:chat_view.mute.forever_label"))
